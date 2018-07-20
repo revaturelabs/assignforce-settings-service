@@ -27,8 +27,8 @@ public class SettingsController {
 	public ResponseEntity<Settings> getById(@PathVariable int id) {
 		Optional<Settings> s = settingService.findById(id);
 		if (!s.isPresent())
-			return new ResponseEntity<Settings>(HttpStatus.NOT_FOUND);
-		return new ResponseEntity<Settings>(s.get(), HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(s.get(), HttpStatus.OK);
 	}
 
 	// update
@@ -36,8 +36,8 @@ public class SettingsController {
 	public ResponseEntity<Settings> update(@RequestBody Settings s) {
 		s = settingService.update(s);
 		if (s == null)
-			return new ResponseEntity<Settings>(HttpStatus.BAD_REQUEST);
-		return new ResponseEntity<Settings>(s, HttpStatus.CREATED);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(s, HttpStatus.CREATED);
 	}
 
 }
