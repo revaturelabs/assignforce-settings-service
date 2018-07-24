@@ -98,8 +98,8 @@ public class SettingsTest {
 	@Test
 	public void getSetTrainerBreakDaysTest() {
 		Settings s1 = new Settings();
-		s1.setTrainserBreakDays(14);
-		assertTrue(s1.getTrainserBreakDays() == 14);
+		s1.setTrainerBreakDays(14);
+		assertTrue(s1.getTrainerBreakDays() == 14);
 	}
 	
 	@Test
