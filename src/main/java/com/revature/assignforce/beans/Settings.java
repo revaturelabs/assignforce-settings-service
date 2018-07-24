@@ -43,7 +43,7 @@ public class Settings {
 	private Integer maxBatchSize;
 
 	@Column(name = "trainserBreakDays")
-	private Integer trainserBreakDays;
+	private Integer trainerBreakDays;
 
 	@Column(name = "defaultLocation")
 	private Integer defaultLocation;
@@ -59,7 +59,7 @@ public class Settings {
 	}
 
 	public Settings(Integer id, String alias, Integer trainersPerPage, Integer reportGrads, Integer batchLength,
-			Integer reportIncomingGrads, Integer minBatchSize, Integer maxBatchSize, Integer trainserBreakDays,
+			Integer reportIncomingGrads, Integer minBatchSize, Integer maxBatchSize, Integer trainerBreakDays,
 			Integer defaultLocation, Integer defaultBuilding, String defaultNamePattern) {
 		super();
 		this.id = id;
@@ -70,7 +70,7 @@ public class Settings {
 		this.reportIncomingGrads = reportIncomingGrads;
 		this.minBatchSize = minBatchSize;
 		this.maxBatchSize = maxBatchSize;
-		this.trainserBreakDays = trainserBreakDays;
+		this.trainerBreakDays = trainerBreakDays;
 		this.defaultLocation = defaultLocation;
 		this.defaultBuilding = defaultBuilding;
 		this.defaultNamePattern = defaultNamePattern;
@@ -140,12 +140,12 @@ public class Settings {
 		this.maxBatchSize = maxBatchSize;
 	}
 
-	public Integer getTrainserBreakDays() {
-		return trainserBreakDays;
+	public Integer getTrainerBreakDays() {
+		return trainerBreakDays;
 	}
 
-	public void setTrainserBreakDays(Integer trainserBreakDays) {
-		this.trainserBreakDays = trainserBreakDays;
+	public void setTrainerBreakDays(Integer trainerBreakDays) {
+		this.trainerBreakDays = trainerBreakDays;
 	}
 
 	public Integer getDefaultLocation() {
