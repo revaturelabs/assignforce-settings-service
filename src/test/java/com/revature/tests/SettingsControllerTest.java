@@ -43,8 +43,7 @@ public class SettingsControllerTest {
 		}
 	}
 	
-	@Autowired
-	private SettingsService settingsService;
+	
 	@Autowired
 	private SettingsRepository settingsRepository;
 	@Autowired
