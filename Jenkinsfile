@@ -99,7 +99,6 @@ pipeline {
         }
 
         stage('Docker Push') {
-            // this step could be integrated with 'Container Build'
             when {
                 anyOf {
                     branch 'master'
