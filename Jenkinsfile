@@ -88,7 +88,7 @@ pipeline {
                             env.DK_TAG='dev-latest'
                         }
                         sh "echo run docker build"
-                        sh "mvn dockerfile:tag@${env.DK_TAG_GOAL}"
+                        sh "mvn dockerfile:build@${env.DK_TAG_GOAL}"
                     } catch(Exception e) {
                         env.FAIL_STG='Docker Build'
                         currentBuild.result='FAILURE'
