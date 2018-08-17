@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.assignforce.beans.Settings;
 import com.revature.assignforce.service.SettingsService;
 
-@CrossOrigin
 @RestController
 public class SettingsController {
 
