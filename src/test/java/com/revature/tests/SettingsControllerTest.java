@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.netflix.ribbon.proxy.annotation.Http;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -52,33 +53,201 @@ public class SettingsControllerTest {
 	@Test
 	public void getByIdTestOK() {
 		Settings s1 = new Settings(3, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
-		Optional<Settings> op1 = Optional.ofNullable(s1);
+		Optional<Settings> op1 = Optional.of(s1);
 		Mockito.when(settingsRepository.findById(3)).thenReturn(op1);
 		ResponseEntity<Settings> reTest = settingsController.getById(3);
-		assertTrue(reTest.getBody().getId() == 3 && reTest.getStatusCode() == HttpStatus.OK);
+//		assertTrue(reTest.getBody().getId() == 3 && reTest.getStatusCode() == HttpStatus.OK);
+		assertEquals(s1.getId().intValue(), reTest.getBody().getId().intValue());
+		assertEquals(HttpStatus.OK, reTest.getStatusCode());
 	}
 	
 	@Test
 	public void getByIdTestNotFound() {
 		ResponseEntity<Settings> reTest = settingsController.getById(9);
-		assertTrue(reTest.getStatusCode() == HttpStatus.NOT_FOUND);
+//		assertTrue(reTest.getStatusCode() == HttpStatus.NOT_FOUND);
+		assertEquals(HttpStatus.NOT_FOUND, reTest.getStatusCode());
 	}
 	
 	@Test
-	public void updateTestCreate() {
+	public void updateTestCreateAlias() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
 		s1.setAlias("Java");
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
-		assertTrue(reTest.getBody().getAlias().equals("Java") && reTest.getStatusCode() == HttpStatus.CREATED);
+//		assertTrue(reTest.getBody().getAlias().equals("Java") && reTest.getStatusCode() == HttpStatus.CREATED);
+		assertEquals(s1.getAlias(), reTest.getBody().getAlias());
+		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
-	
+
 	@Test
-	public void updateTestBadRequest() {
+	public void updateTestBadRequestAlias() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
 		s1.setAlias("C++");
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
-		assertTrue(reTest.getStatusCode() == HttpStatus.BAD_REQUEST);
+//		assertTrue(reTest.getStatusCode() == HttpStatus.BAD_REQUEST);
+		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestCreateTPPage(){
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
+		s1.setTrainersPerPage(2);
+		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(s1.getTrainersPerPage().intValue(), reTest.getBody().getTrainersPerPage().intValue());
+		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestBadRequestTPPage() {
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		s1.setTrainersPerPage(-4);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestCreateRepGrads(){
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
+		s1.setReportGrads(1);
+		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(s1.getReportGrads().intValue(), reTest.getBody().getReportGrads().intValue());
+		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestBadRequestRepGrads() {
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		s1.setReportGrads(-4);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestCreateBatchLength(){
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
+		s1.setBatchLength(48);
+		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(s1.getBatchLength().intValue(), reTest.getBody().getBatchLength().intValue());
+		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestBadRequestBatchLength() {
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		s1.setBatchLength(48);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestCreateReportIG(){
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
+		s1.setReportIncomingGrads(34);
+		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(34, reTest.getBody().getReportIncomingGrads().intValue());
+		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestBadRequestReportIG() {
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		s1.setBatchLength(34);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestCreateMinBS(){
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
+		s1.setMinBatchSize(12);
+		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(12, reTest.getBody().getMinBatchSize().intValue());
+		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestBadRequestMinBS() {
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		s1.setBatchLength(12);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestCreateMaxBS(){
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
+		s1.setMaxBatchSize(18);
+		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(18, reTest.getBody().getMaxBatchSize().intValue());
+		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestBadRequestMaxBS() {
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		s1.setBatchLength(18);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestCreateTrainBD(){
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
+		s1.setTrainerBreakDays(5);
+		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(5, reTest.getBody().getTrainerBreakDays().intValue());
+		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestBadRequestTrainBD() {
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		s1.setBatchLength(5);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestCreateDefLoc(){
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
+		s1.setDefaultLocation(1);
+		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(1, reTest.getBody().getDefaultLocation().intValue());
+		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestBadRequestDefLoc() {
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		s1.setBatchLength(1);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestCreateDefBld(){
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
+		s1.setDefaultBuilding(1);
+		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(1, reTest.getBody().getDefaultBuilding().intValue());
+		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
+	}
+
+	@Test
+	public void updateTestBadRequestDefBld() {
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		s1.setBatchLength(1);
+		ResponseEntity<Settings> reTest = settingsController.update(s1);
+		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 	
 }

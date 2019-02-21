@@ -36,7 +36,8 @@ public class SettingsTest {
 	@Test 
 	public void settingsTest2() {
 		Settings s1 = new Settings(3, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
-		assertTrue(s1.getId() == 3);
+//		assertTrue(s1.getId() == 3);
+		assertEquals(3, s1.getId().intValue());
 	}
 	
 	@Test
