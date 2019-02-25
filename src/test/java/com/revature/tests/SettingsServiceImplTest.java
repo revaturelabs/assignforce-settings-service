@@ -67,11 +67,11 @@ public class SettingsServiceImplTest {
 	@Test
 	public void findByIdTest() {
 		Settings s1 = new Settings(1, "SettingsOne", 4, 3, 10, 23, 10, 30, 2, 1, 1, "Microservices");
-		Optional<Settings> op1 = Optional.ofNullable(s1);
-		Mockito.when(settingsRepository.findById(1)).thenReturn(op1);
-		Optional<Settings> opTest = settingsService.findById(1);
+		Optional<Settings> op1 = Optional.of(s1);
+		Mockito.when(settingsRepository.findById(s1.getId())).thenReturn(op1);
+		Optional<Settings> opTest = settingsService.findById(s1.getId());
 //		assertTrue(opTest.get().getId() == 1);
-		assertEquals(1, opTest.get().getId().intValue());
+		assertEquals(s1.getId().intValue(), opTest.get().getId().intValue());
 	}
 	
 	@Test
@@ -171,16 +171,16 @@ public class SettingsServiceImplTest {
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		Settings sTest = settingsService.create(s1);
 //		assertTrue(sTest.getId() == 7);
-		assertEquals(7, sTest.getId().intValue());
+		assertEquals(s1.getId().intValue(), sTest.getId().intValue());
 	}
 	
 	@Test
 	public void deleteTest() {
-		Mockito.doNothing().when(settingsRepository).deleteById(4);
-		settingsService.delete(4);
+        Settings s1 = new Settings(4, "SettingsSeven", 4, 3, 10, 23, 10, 30, 2, 1, 1, "FullStack");
+        Mockito.doNothing().when(settingsRepository).deleteById(4);
+        settingsService.delete(4);
 		Optional<Settings> opTest = settingsService.findById(4);
-//		assertFalse(opTest.isPresent());
-		assertEquals(false, opTest.isPresent());
+		assertFalse(opTest.isPresent());
 	}
 
 }

@@ -148,7 +148,7 @@ public class SettingsControllerTest {
 		s1.setReportIncomingGrads(34);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
-		assertEquals(34, reTest.getBody().getReportIncomingGrads().intValue());
+		assertEquals(s1.getReportIncomingGrads().intValue(), reTest.getBody().getReportIncomingGrads().intValue());
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
@@ -166,7 +166,7 @@ public class SettingsControllerTest {
 		s1.setMinBatchSize(12);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
-		assertEquals(12, reTest.getBody().getMinBatchSize().intValue());
+		assertEquals(s1.getMinBatchSize().intValue(), reTest.getBody().getMinBatchSize().intValue());
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
@@ -184,7 +184,7 @@ public class SettingsControllerTest {
 		s1.setMaxBatchSize(18);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
-		assertEquals(18, reTest.getBody().getMaxBatchSize().intValue());
+		assertEquals(s1.getMaxBatchSize().intValue(), reTest.getBody().getMaxBatchSize().intValue());
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
@@ -202,7 +202,7 @@ public class SettingsControllerTest {
 		s1.setTrainerBreakDays(5);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
-		assertEquals(5, reTest.getBody().getTrainerBreakDays().intValue());
+		assertEquals(s1.getTrainerBreakDays().intValue(), reTest.getBody().getTrainerBreakDays().intValue());
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
@@ -220,7 +220,7 @@ public class SettingsControllerTest {
 		s1.setDefaultLocation(1);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
-		assertEquals(1, reTest.getBody().getDefaultLocation().intValue());
+		assertEquals(s1.getDefaultLocation().intValue(), reTest.getBody().getDefaultLocation().intValue());
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
@@ -238,7 +238,7 @@ public class SettingsControllerTest {
 		s1.setDefaultBuilding(1);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
-		assertEquals(1, reTest.getBody().getDefaultBuilding().intValue());
+		assertEquals(s1.getDefaultBuilding().intValue(), reTest.getBody().getDefaultBuilding().intValue());
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
