@@ -6,7 +6,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 
-@EnableDiscoveryClient
 @SpringBootApplication
 @EnableWebSecurity
 public class SettingsServiceApplication {
