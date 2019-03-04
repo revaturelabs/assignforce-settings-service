@@ -3,6 +3,7 @@ pipeline {
     environment {
         APP_NAME="settings-service"
         IMG_NAME="af-settings"
+        CF_ORG="Revature Training"
     }
 
     stages {
@@ -145,7 +146,7 @@ pipeline {
                             env.PROFILE="development"
                         }
                         env.CF_DOCKER_PASSWORD=readFile("/run/secrets/CF_DOCKER_PASSWORD").trim()
-                        sh "cf target -s ${env.SPACE}"
+                        sh "cf target -o ${env.CF_ORG} -s ${env.SPACE}"
                         sh "cf push -o ${env.IMG} --docker-username ${env.DK_U} --no-start"
                         sh "cf set-env ${env.APP_NAME} SPRING_PROFILES_ACTIVE ${env.PROFILE}"
                         sh "cf start ${env.APP_NAME}"
