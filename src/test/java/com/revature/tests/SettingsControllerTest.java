@@ -2,11 +2,8 @@ package com.revature.tests;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
-import com.netflix.ribbon.proxy.annotation.Http;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
