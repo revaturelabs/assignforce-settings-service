@@ -26,14 +26,14 @@ public class SettingsServiceImplTest {
 	
 	@Configuration
 	static class SettingsServiceTestContextConfiguration {
-	@Bean
-	public SettingsService SettingsService() {
-		return new SettingsServiceImpl();
-		}
-	@Bean
-	public SettingsRepository SettingsRepository() {
-		return Mockito.mock(SettingsRepository.class);
-		}
+		@Bean
+		public SettingsService SettingsService() {
+			return new SettingsServiceImpl();
+			}
+		@Bean
+		public SettingsRepository SettingsRepository() {
+			return Mockito.mock(SettingsRepository.class);
+			}
 	}
 	
 	@Autowired
