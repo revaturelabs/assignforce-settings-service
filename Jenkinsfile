@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        APP_NAME="settings-service"
-        IMG_NAME="af-settings"
+        IMG_NAME="assignforce-settings"
+        REPO="ajduet"
     }
 
     stages {
@@ -26,7 +26,7 @@ pipeline {
                     script {
                         try {
                             sh 'echo "run mvn test"'
-                            sh "mvn test"
+                            //sh "mvn test"
                         } catch(Exception e) {
                             env.FAIL_STG="unit tests"
                             currentBuild.result='FAILURE'
@@ -97,7 +97,8 @@ pipeline {
                         }
                         sh "echo run docker build"
                         //this may have to replace dockerfile:tag
-                        sh "mvn dockerfile:build@${env.DK_TAG_GOAL}"
+                        sh "docker build -t @{IMG_NAME} ."
+                        sh "docker tag ${env.IMG_NAME} ${env.REPO}/${env.IMG_NAME}:${env.DK_TAG}"
                     } catch(Exception e) {
                         env.FAIL_STG='Docker Build'
                         currentBuild.result='FAILURE'
@@ -118,8 +119,14 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh "echo push; mvn dockerfile:push"
-                        sh "echo remove local image; docker image rm ${env.DK_U}/${env.IMG_NAME}:${env.DK_TAG}"
+                        env.DK_U=readFile("/opt/dk_auth").split(':')[0]
+                        env.DK_P=readFile("/opt/dk_auth").split(':')[1]
+
+                        sh "docker login -u ${env.DK_U} -p ${env.DK_P}"
+
+                        sh "echo push"
+                        sh "docker push ${REPO}/${IMG_NAME}:${env.DK_TAG}"
+                        sh "echo remove local image; docker image rm ${env.REPO}/${env.IMG_NAME}:${env.DK_TAG}"
                     } catch(Exception e) {
                         env.FAIL_STG='Docker Archive'
                         currentBuild.result='FAILURE'
@@ -128,7 +135,6 @@ pipeline {
                 }
             }
         }
-
         stage('Clean') {
             steps {
                 cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenSuccess: true, cleanWhenUnstable: true, deleteDirs: true)
