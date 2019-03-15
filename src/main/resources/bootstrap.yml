@@ -1,7 +1,13 @@
-# spring:
-#   cloud:
-#     config:
-#       name: location-service
-#       discovery:
-#         service-id: config-service
-#         enabled: true
+spring:
+  profiles:
+    active: ${ACTIVE_PROFILES:default}
+  cloud:
+    config:
+      uri: ${CONFIG_URL}
+  application:
+    name: settings-service
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
