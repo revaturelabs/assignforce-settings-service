@@ -27,14 +27,14 @@ public class Settings {
 	@Column(name = "trainersPerPage")
 	private Integer trainersPerPage;
 
-	@Column(name = "reportGrads")
-	private Integer reportGrads;
-
 	@Column(name = "batchLength")
 	private Integer batchLength;
 
-	@Column(name = "reportIncomingGrads")
-	private Integer reportIncomingGrads;
+	@Column(name = "reportIncomingCandidates")
+	private Integer reportIncomingCandidates;
+
+	@Column(name = "reportOutgoingGrads")
+	private Integer reportOutgoingGrads;
 
 	@Column(name = "minBatchSize")
 	private Integer minBatchSize;
@@ -42,7 +42,7 @@ public class Settings {
 	@Column(name = "maxBatchSize")
 	private Integer maxBatchSize;
 
-	@Column(name = "trainserBreakDays")
+	@Column(name = "trainerBreakDays")
 	private Integer trainerBreakDays;
 
 	@Column(name = "defaultLocation")
@@ -58,16 +58,17 @@ public class Settings {
 		super();
 	}
 
-	public Settings(Integer id, String alias, Integer trainersPerPage, Integer reportGrads, Integer batchLength,
-			Integer reportIncomingGrads, Integer minBatchSize, Integer maxBatchSize, Integer trainerBreakDays,
+	public Settings(Integer id, String alias, Integer trainersPerPage, Integer batchLength,
+			Integer reportIncomingCandidates, Integer reportOutgoingGrads, Integer minBatchSize, Integer maxBatchSize, Integer trainerBreakDays,
 			Integer defaultLocation, Integer defaultBuilding, String defaultNamePattern) {
 		super();
 		this.id = id;
 		this.alias = alias;
 		this.trainersPerPage = trainersPerPage;
-		this.reportGrads = reportGrads;
+
 		this.batchLength = batchLength;
-		this.reportIncomingGrads = reportIncomingGrads;
+		this.reportIncomingCandidates = reportIncomingCandidates;
+		this.reportOutgoingGrads = reportOutgoingGrads;
 		this.minBatchSize = minBatchSize;
 		this.maxBatchSize = maxBatchSize;
 		this.trainerBreakDays = trainerBreakDays;
@@ -75,6 +76,8 @@ public class Settings {
 		this.defaultBuilding = defaultBuilding;
 		this.defaultNamePattern = defaultNamePattern;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -100,14 +103,6 @@ public class Settings {
 		this.trainersPerPage = trainersPerPage;
 	}
 
-	public Integer getReportGrads() {
-		return reportGrads;
-	}
-
-	public void setReportGrads(Integer reportGrads) {
-		this.reportGrads = reportGrads;
-	}
-
 	public Integer getBatchLength() {
 		return batchLength;
 	}
@@ -116,12 +111,20 @@ public class Settings {
 		this.batchLength = batchLength;
 	}
 
-	public Integer getReportIncomingGrads() {
-		return reportIncomingGrads;
+	public Integer getReportIncomingCandidates() {
+		return reportIncomingCandidates;
 	}
 
-	public void setReportIncomingGrads(Integer reportIncomingGrads) {
-		this.reportIncomingGrads = reportIncomingGrads;
+	public Integer getReportOutgoingGrads() {
+		return reportOutgoingGrads;
+	}
+
+	public void setReportOutgoingGrads(Integer reportOutgoingGrads) {
+		this.reportOutgoingGrads = reportOutgoingGrads;
+	}
+
+	public void setReportIncomingCandidates(Integer reportIncomingCandidates) {
+		this.reportIncomingCandidates = reportIncomingCandidates;
 	}
 
 	public Integer getMinBatchSize() {

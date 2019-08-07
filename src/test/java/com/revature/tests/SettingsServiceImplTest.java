@@ -45,10 +45,10 @@ public class SettingsServiceImplTest {
 
 	@Test
 	public void getAllTest() {
-		Settings s1 = new Settings(1, "SettingsOne", 4, 3, 10, 23, 10, 30, 2, 1, 1, "Microservices");
-		Settings s2 = new Settings(3, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
-		Settings s3 = new Settings(5, "SettingsFive", 2, 3, 10, 23, 10, 30, 2, 1, 14, "AWS");
-		Settings s4 = new Settings(7, "SettingsSeven", 2, 3, 10, 23, 10, 30, 2, 1, 3, ".NET");
+		Settings s1 = new Settings(1, "SettingsOne", 4, 3, 10, 23, 10, 30, 2, 1, 1,   "Microservices");
+		Settings s2 = new Settings(3, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,   "Database");
+		Settings s3 = new Settings(5, "SettingsFive", 2, 3, 10, 23, 10, 30, 2, 1, 14,  "AWS");
+		Settings s4 = new Settings(7, "SettingsSeven", 2, 3, 10, 23, 10, 30, 2, 1, 3,  ".NET");
 		List<Settings> settingsList = new ArrayList<Settings>();
 		settingsList.add(s1);
 		settingsList.add(s2);
@@ -66,7 +66,7 @@ public class SettingsServiceImplTest {
 	
 	@Test
 	public void findByIdTest() {
-		Settings s1 = new Settings(1, "SettingsOne", 4, 3, 10, 23, 10, 30, 2, 1, 1, "Microservices");
+		Settings s1 = new Settings(1, "SettingsOne", 4, 3, 10, 23, 10, 30, 2, 1, 1,   "Microservices");
 		Optional<Settings> op1 = Optional.of(s1);
 		Mockito.when(settingsRepository.findById(s1.getId())).thenReturn(op1);
 		Optional<Settings> opTest = settingsService.findById(s1.getId());
@@ -76,7 +76,7 @@ public class SettingsServiceImplTest {
 	
 	@Test
 	public void updateTestAlias() {
-		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1, "FullStack");
+		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1,   "FullStack");
 		s1.setAlias("Java");
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		Settings sTest = settingsService.update(s1);
@@ -86,7 +86,7 @@ public class SettingsServiceImplTest {
 
 	@Test
 	public void updateTestTPPage() {
-		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1, "FullStack");
+		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1,   "FullStack");
 		s1.setTrainersPerPage(2);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		Settings sTest = settingsService.update(s1);
@@ -95,16 +95,16 @@ public class SettingsServiceImplTest {
 
 	@Test
 	public void updateTestRepGrads() {
-		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1, "FullStack");
-		s1.setReportGrads(2);
+		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1,  "FullStack");
+		s1.setReportOutgoingGrads(2);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		Settings sTest = settingsService.update(s1);
-		assertEquals(s1.getReportGrads().intValue(), sTest.getReportGrads().intValue());
+		assertEquals(s1.getReportOutgoingGrads().intValue(), sTest.getReportOutgoingGrads().intValue());
 	}
 
 	@Test
 	public void updateTestBatchLength() {
-		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1, "FullStack");
+		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1,  "FullStack");
 		s1.setBatchLength(12);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		Settings sTest = settingsService.update(s1);
@@ -113,16 +113,16 @@ public class SettingsServiceImplTest {
 
 	@Test
 	public void updateTestRepIncGrade() {
-		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1, "FullStack");
-		s1.setReportIncomingGrads(22);
+		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1,  "FullStack");
+		s1.setReportIncomingCandidates(22);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		Settings sTest = settingsService.update(s1);
-		assertEquals(s1.getReportIncomingGrads().intValue(), sTest.getReportIncomingGrads().intValue());
+		assertEquals(s1.getReportIncomingCandidates().intValue(), sTest.getReportIncomingCandidates().intValue());
 	}
 
 	@Test
 	public void updateTestMinBS() {
-		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1, "FullStack");
+		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1,  "FullStack");
 		s1.setMinBatchSize(8);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		Settings sTest = settingsService.update(s1);
@@ -131,7 +131,7 @@ public class SettingsServiceImplTest {
 
 	@Test
 	public void updateTestMaxBS() {
-		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1, "FullStack");
+		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1,  "FullStack");
 		s1.setMaxBatchSize(2);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		Settings sTest = settingsService.update(s1);
@@ -149,7 +149,7 @@ public class SettingsServiceImplTest {
 
 	@Test
 	public void updateTestDefLoc() {
-		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1, "FullStack");
+		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1,  "FullStack");
 		s1.setDefaultLocation(2);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		Settings sTest = settingsService.update(s1);
@@ -158,7 +158,7 @@ public class SettingsServiceImplTest {
 
 	@Test
 	public void updateTestDefBld() {
-		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1, "FullStack");
+		Settings s1 = new Settings(6, "SettingsSix", 4, 3, 10, 23, 10, 30, 2, 1, 1,   "FullStack");
 		s1.setDefaultBuilding(2);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		Settings sTest = settingsService.update(s1);
@@ -167,7 +167,7 @@ public class SettingsServiceImplTest {
 	
 	@Test
 	public void createTest() {
-		Settings s1 = new Settings(7, "SettingsSeven", 4, 3, 10, 23, 10, 30, 2, 1, 1, "FullStack");
+		Settings s1 = new Settings(7, "SettingsSeven", 4, 3, 10, 23, 10, 30, 2, 1, 1,  "FullStack");
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		Settings sTest = settingsService.create(s1);
 //		assertTrue(sTest.getId() == 7);

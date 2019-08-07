@@ -63,14 +63,7 @@ public class SettingsTest {
 //		assertTrue(s1.getTrainersPerPage() == 2);
         assertEquals(2, s1.getTrainersPerPage().intValue());
 	}
-	
-	@Test
-	public void getSetReportGradsTest() {
-		Settings s1 = new Settings();
-		s1.setReportGrads(6);
-//		assertTrue(s1.getReportGrads() == 6);
-		assertEquals(6, s1.getReportGrads().intValue());
-	}
+
 	
 	@Test
 	public void getSetBatchLength() {
@@ -81,11 +74,19 @@ public class SettingsTest {
 	}
 	
 	@Test
-	public void getSetReportIncomingGradsTest() {
+	public void getSetReportIncomingCandidatesTest() {
 		Settings s1 = new Settings();
-		s1.setReportIncomingGrads(12);
+		s1.setReportIncomingCandidates(12);
 //		assertTrue(s1.getReportIncomingGrads() == 12);
-        assertEquals(12, s1.getReportIncomingGrads().intValue());
+        assertEquals(12, s1.getReportIncomingCandidates().intValue());
+	}
+
+	@Test
+	public void getSetReportOutgoingGradsTest() {
+		Settings s1 = new Settings();
+		s1.setReportOutgoingGrads(12);
+//		assertTrue(s1.getReportIncomingGrads() == 12);
+		assertEquals(12, s1.getReportOutgoingGrads().intValue());
 	}
 	
 	@Test

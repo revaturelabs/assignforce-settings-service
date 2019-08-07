@@ -49,7 +49,7 @@ public class SettingsControllerTest {
 	
 	@Test
 	public void getByIdTestOK() {
-		Settings s1 = new Settings(3, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		Settings s1 = new Settings(3, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		Optional<Settings> op1 = Optional.of(s1);
 		Mockito.when(settingsRepository.findById(3)).thenReturn(op1);
 		ResponseEntity<Settings> reTest = settingsController.getById(3);
@@ -67,7 +67,7 @@ public class SettingsControllerTest {
 	
 	@Test
 	public void updateTestCreateAlias() {
-		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setAlias("Java");
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
@@ -78,7 +78,7 @@ public class SettingsControllerTest {
 
 	@Test
 	public void updateTestBadRequestAlias() {
-		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setAlias("C++");
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 //		assertTrue(reTest.getStatusCode() == HttpStatus.BAD_REQUEST);
@@ -87,7 +87,7 @@ public class SettingsControllerTest {
 
 	@Test
 	public void updateTestCreateTPPage(){
-		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
 		s1.setTrainersPerPage(2);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
@@ -97,7 +97,7 @@ public class SettingsControllerTest {
 
 	@Test
 	public void updateTestBadRequestTPPage() {
-		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setTrainersPerPage(-4);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
@@ -105,25 +105,25 @@ public class SettingsControllerTest {
 
 	@Test
 	public void updateTestCreateRepGrads(){
-		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
-		s1.setReportGrads(1);
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
+		s1.setReportOutgoingGrads(1);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
-		assertEquals(s1.getReportGrads().intValue(), reTest.getBody().getReportGrads().intValue());
+		assertEquals(s1.getReportOutgoingGrads().intValue(), reTest.getBody().getReportOutgoingGrads().intValue());
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
 	@Test
 	public void updateTestBadRequestRepGrads() {
-		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
-		s1.setReportGrads(-4);
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
+		s1.setReportOutgoingGrads(-4);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
 	@Test
 	public void updateTestCreateBatchLength(){
-		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
 		s1.setBatchLength(48);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
@@ -133,7 +133,7 @@ public class SettingsControllerTest {
 
 	@Test
 	public void updateTestBadRequestBatchLength() {
-		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setBatchLength(48);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
@@ -141,17 +141,17 @@ public class SettingsControllerTest {
 
 	@Test
 	public void updateTestCreateReportIG(){
-		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
-		s1.setReportIncomingGrads(34);
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
+		s1.setReportIncomingCandidates(34);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
-		assertEquals(s1.getReportIncomingGrads().intValue(), reTest.getBody().getReportIncomingGrads().intValue());
+		assertEquals(s1.getReportIncomingCandidates().intValue(), reTest.getBody().getReportIncomingCandidates().intValue());
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
 	@Test
 	public void updateTestBadRequestReportIG() {
-		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setBatchLength(34);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
@@ -159,7 +159,7 @@ public class SettingsControllerTest {
 
 	@Test
 	public void updateTestCreateMinBS(){
-		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
 		s1.setMinBatchSize(12);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
@@ -169,7 +169,7 @@ public class SettingsControllerTest {
 
 	@Test
 	public void updateTestBadRequestMinBS() {
-		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setBatchLength(12);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
@@ -177,7 +177,7 @@ public class SettingsControllerTest {
 
 	@Test
 	public void updateTestCreateMaxBS(){
-		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
 		s1.setMaxBatchSize(18);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
@@ -187,7 +187,7 @@ public class SettingsControllerTest {
 
 	@Test
 	public void updateTestBadRequestMaxBS() {
-		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setBatchLength(18);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
@@ -195,7 +195,7 @@ public class SettingsControllerTest {
 
 	@Test
 	public void updateTestCreateTrainBD(){
-		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
 		s1.setTrainerBreakDays(5);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
@@ -205,7 +205,7 @@ public class SettingsControllerTest {
 
 	@Test
 	public void updateTestBadRequestTrainBD() {
-		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setBatchLength(5);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
@@ -213,7 +213,7 @@ public class SettingsControllerTest {
 
 	@Test
 	public void updateTestCreateDefLoc(){
-		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
 		s1.setDefaultLocation(1);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
@@ -223,7 +223,7 @@ public class SettingsControllerTest {
 
 	@Test
 	public void updateTestBadRequestDefLoc() {
-		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setBatchLength(1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
@@ -231,7 +231,7 @@ public class SettingsControllerTest {
 
 	@Test
 	public void updateTestCreateDefBld(){
-		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2, "Database");
+		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
 		s1.setDefaultBuilding(1);
 		Mockito.when(settingsRepository.save(s1)).thenReturn(s1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
@@ -241,7 +241,7 @@ public class SettingsControllerTest {
 
 	@Test
 	public void updateTestBadRequestDefBld() {
-		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2, "Database");
+		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setBatchLength(1);
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
