@@ -27,15 +27,15 @@ public class SettingsControllerTest {
 
 	@Configuration
 	static class SettingsServiceTestContextConfiguration {
-	@Bean
+	@Bean // bean (SettingsService) will be tested 
 	public SettingsService SettingsService() {
 		return new SettingsServiceImpl();
 		}
-	@Bean
+	@Bean // bean (SettingsRepository) will be tested
 	public SettingsRepository SettingsRepository() {
 		return Mockito.mock(SettingsRepository.class);
 		}
-	@Bean
+	@Bean // bean (SettingsController) will be tested
 	public SettingsController SettingsController() {
 		return new SettingsController();
 		}
@@ -47,7 +47,7 @@ public class SettingsControllerTest {
 	@Autowired
 	private SettingsController settingsController;
 	
-	@Test
+	@Test // method check get by id with status OK - when id was found
 	public void getByIdTestOK() {
 		Settings s1 = new Settings(3, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		Optional<Settings> op1 = Optional.of(s1);
@@ -58,14 +58,14 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.OK, reTest.getStatusCode());
 	}
 	
-	@Test
+	@Test // method check get by id with status NOT_FOUND - when id wasn't found
 	public void getByIdTestNotFound() {
 		ResponseEntity<Settings> reTest = settingsController.getById(9);
 //		assertTrue(reTest.getStatusCode() == HttpStatus.NOT_FOUND);
 		assertEquals(HttpStatus.NOT_FOUND, reTest.getStatusCode());
 	}
 	
-	@Test
+	@Test // method check that update alias "Java" was successful
 	public void updateTestCreateAlias() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setAlias("Java");
@@ -76,7 +76,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that alias wasn't update successful
 	public void updateTestBadRequestAlias() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setAlias("C++");
@@ -85,7 +85,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that creation TPPage had status created
 	public void updateTestCreateTPPage(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
 		s1.setTrainersPerPage(2);
@@ -95,7 +95,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that TPPage had bad request during creation  
 	public void updateTestBadRequestTPPage() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setTrainersPerPage(-4);
@@ -103,7 +103,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that ReportOutgoingGrads was created successful
 	public void updateTestCreateRepGrads(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
 		s1.setReportOutgoingGrads(1);
@@ -113,7 +113,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that during update ReportOutgoingGrads was successful or not
 	public void updateTestBadRequestRepGrads() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setReportOutgoingGrads(-4);
@@ -121,7 +121,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that creating of Batch length was successful
 	public void updateTestCreateBatchLength(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
 		s1.setBatchLength(48);
@@ -131,7 +131,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that during creating of Batch length had some issues 
 	public void updateTestBadRequestBatchLength() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setBatchLength(48);
@@ -139,7 +139,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that creating of ReportIG was successful
 	public void updateTestCreateReportIG(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
 		s1.setReportIncomingCandidates(34);
@@ -149,7 +149,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that during creating of reTest had some issues 
 	public void updateTestBadRequestReportIG() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setBatchLength(34);
@@ -157,7 +157,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that creating of minimal size of batch was successful
 	public void updateTestCreateMinBS(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
 		s1.setMinBatchSize(12);
@@ -167,7 +167,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that during creating of minimal size of batch had some issues
 	public void updateTestBadRequestMinBS() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setBatchLength(12);
@@ -175,7 +175,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that creating of maximum batch size was successful
 	public void updateTestCreateMaxBS(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
 		s1.setMaxBatchSize(18);
@@ -185,7 +185,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that during creating of maximum batch size had some issues
 	public void updateTestBadRequestMaxBS() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setBatchLength(18);
@@ -193,7 +193,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that creating of BD for trainers was successful
 	public void updateTestCreateTrainBD(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
 		s1.setTrainerBreakDays(5);
@@ -203,7 +203,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that during creating of BD for trainers had some issues
 	public void updateTestBadRequestTrainBD() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setBatchLength(5);
@@ -211,7 +211,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that creating of default location was successful
 	public void updateTestCreateDefLoc(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
 		s1.setDefaultLocation(1);
@@ -221,7 +221,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that during creating of default location had some issues
 	public void updateTestBadRequestDefLoc() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setBatchLength(1);
@@ -229,7 +229,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that creating of default building was successful
 	public void updateTestCreateDefBld(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
 		s1.setDefaultBuilding(1);
@@ -239,7 +239,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
-	@Test
+	@Test // method check that during creating of default building had some issues
 	public void updateTestBadRequestDefBld() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
 		s1.setBatchLength(1);
