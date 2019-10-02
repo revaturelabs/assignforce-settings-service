@@ -17,6 +17,11 @@ import com.wordnik.swagger.annotations.Api;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/*
+ * 
+ * A controller for retrieving, creating, updating and deleting settings information
+ *
+ */
 @RestController
 @EnableSwagger2
 @Api(value="Settings-data", description="Operation define some settings during of using revature.assignforce")
@@ -24,6 +29,12 @@ public class SettingsController {
 
 	@Autowired  
 	SettingsService settingService;
+	
+	/* 
+	 * @param   id setting
+	 * @return	ResponseEntity with Status OK/ NOT FOUND
+	 * @see		Setting
+	 */
 
 	// implement the URL handler to findOne by "id" in our bean settingService
 	@GetMapping(value = "{id}")	// implement the URL handler 
@@ -33,6 +44,12 @@ public class SettingsController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(s.get(), HttpStatus.OK);
 	}
+	
+	/* 
+	 * @return	ResponseEntity Status CREATED / BAD REQUEST 
+	 * @see		setting
+	 * @see		ResponseEntity
+	 */
 
 	// update
 	@PutMapping	// that annotation acts as a shortcut
