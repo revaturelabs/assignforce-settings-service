@@ -12,6 +12,15 @@ import org.springframework.stereotype.Component;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/*
+ * Settings - create a table "Settings" in DB with columns ("Settings_ID", "Alias", "trainersPerPage", )
+ * "batchLength", "reportIncomingCandidates", "minBatchSize", "maxBatchSize", "trainerBreakDays", 
+ * "defaultLocation", "defaultBuilding", "defaultNamePattern")
+ * Where "Alias" and "defaultNamePattern" represented as String
+ * And others as integer.
+ * 
+ * Constructor , getters and setter based on all variables. 
+ */
 @Component
 @Entity //this POJO class map to DB
 @Table(name = "Settings") //use a table with name Settings
