@@ -5,11 +5,15 @@ import java.util.Optional;
 
 import com.revature.assignforce.beans.Settings;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+@EnableSwagger2
 public interface SettingsService {
 	
-	List<Settings> getAll();
-	Optional<Settings> findById(int id);
-	Settings update(Settings b);
-	Settings create(Settings b);
-	void delete(int id);
+	// DAO with list of methods
+	List<Settings> getAll(); // get all from table based on bean Settings
+	Optional<Settings> findById(int id); // find by id
+	Settings update(Settings b); // update batch
+	Settings create(Settings b); // create batch
+	void delete(int id); // delete assign id
 }
