@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.assignforce.beans.Settings;
 import com.revature.assignforce.service.SettingsService;
-import com.wordnik.swagger.annotations.Api;
 
+import io.swagger.annotations.Api;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /*
