@@ -7,6 +7,16 @@ import com.revature.assignforce.beans.Settings;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/*
+ * 
+ * DAO consist list of all methods:
+ *  - get all batches
+ *  - get batch by id (optional)
+ *  - create batch 
+ *  - update batch
+ *  - delete batch by id 
+ *
+ */
 @EnableSwagger2
 public interface SettingsService {
 	
