@@ -11,6 +11,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * SettingsServiceApplication creates a web application with resources that are protected by Spring Security
  *
  */
+
 @SpringBootApplication
 @EnableWebSecurity // creating a web application with resources that are protected by Spring Security.
 @EnableSwagger2
