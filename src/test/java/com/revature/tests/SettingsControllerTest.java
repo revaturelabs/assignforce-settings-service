@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.revature.assignforce.SettingsServiceApplication;
 import com.revature.assignforce.beans.Settings;
 import com.revature.assignforce.controllers.SettingsController;
 import com.revature.assignforce.repos.SettingsRepository;
@@ -47,6 +48,9 @@ public class SettingsControllerTest {
 	@Autowired
 	private SettingsController settingsController;
 	
+	/**
+	 * Tests if getting settings by Id returns value as expected and returns an HttpStatus OK.
+	 */
 	@Test
 	public void getByIdTestOK() {
 		Settings s1 = new Settings(3, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
@@ -58,6 +62,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.OK, reTest.getStatusCode());
 	}
 	
+	/**
+	 * Tests if getting settings by a non-existent Id returns an HttpStatus NOT_FOUND as expected.
+	 */
 	@Test
 	public void getByIdTestNotFound() {
 		ResponseEntity<Settings> reTest = settingsController.getById(9);
@@ -65,6 +72,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.NOT_FOUND, reTest.getStatusCode());
 	}
 	
+	/**
+	 * Tests if creating alias within settings works properly and returns an HttpStatus CREATED as expected.
+	 */
 	@Test
 	public void updateTestCreateAlias() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
@@ -76,6 +86,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if updating alias with bad request returns an HttpStatus BAD_REQUEST as expected.
+	 */
 	@Test
 	public void updateTestBadRequestAlias() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
@@ -85,6 +98,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if updating trainers per page works as expected and returns an HttpStatus CREATED.
+	 */
 	@Test
 	public void updateTestCreateTPPage(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
@@ -95,6 +111,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if updating trainers per page with bad request returns and HttpStatus BAD_REQUEST as expected.
+	 */
 	@Test
 	public void updateTestBadRequestTPPage() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
@@ -103,6 +122,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if creating report on outgoing graduates works as expected and returns an HttpStatus CREATED.
+	 */
 	@Test
 	public void updateTestCreateRepGrads(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
@@ -113,6 +135,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if updating report on outgoing graduates with bad request returns an HttpStatus BAD_REQUEST as expected.
+	 */
 	@Test
 	public void updateTestBadRequestRepGrads() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
@@ -121,6 +146,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if creating batch length works as expected and returns an HttpStatus CREATED.
+	 */
 	@Test
 	public void updateTestCreateBatchLength(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
@@ -131,6 +159,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if updating batch length with bad request returns an HttpStatus BAD_REQUEST as expected.
+	 */
 	@Test
 	public void updateTestBadRequestBatchLength() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
@@ -139,6 +170,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if creating report on incoming candidates works as expected and returns an HttpStatus CREATED.
+	 */
 	@Test
 	public void updateTestCreateReportIG(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
@@ -149,6 +183,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if updating report on incoming candidates with a bad request returns an HttpStatus BAD_REQUEST as expected.
+	 */
 	@Test
 	public void updateTestBadRequestReportIG() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
@@ -157,6 +194,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if creating a minimum batch size works as expected and returns an HttpStatus CREATED.
+	 */
 	@Test
 	public void updateTestCreateMinBS(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
@@ -167,6 +207,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if updating minimum batch size with bad request returns an HttpStatus BAD_REQUEST as expected.
+	 */
 	@Test
 	public void updateTestBadRequestMinBS() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
@@ -175,6 +218,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if creating a maximum batch size works as expected and returns an HttpStatus CREATED.
+	 */
 	@Test
 	public void updateTestCreateMaxBS(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
@@ -184,7 +230,10 @@ public class SettingsControllerTest {
 		assertEquals(s1.getMaxBatchSize().intValue(), reTest.getBody().getMaxBatchSize().intValue());
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
-
+	
+	/**
+	 * Tests if updating maximum batch size with bad request returns an HttpStatus BAD_REQUEST as expected.
+	 */
 	@Test
 	public void updateTestBadRequestMaxBS() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
@@ -193,6 +242,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if creating trainer break days works as expected and returns an HttpStatus CREATED.
+	 */
 	@Test
 	public void updateTestCreateTrainBD(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
@@ -203,6 +255,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if updating trainer break days with bad request returns an HttpStatus BAD_REQUEST as expected.
+	 */
 	@Test
 	public void updateTestBadRequestTrainBD() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
@@ -211,6 +266,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if creating default location works as expected and returns an HttpStatus CREATED.
+	 */
 	@Test
 	public void updateTestCreateDefLoc(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
@@ -221,6 +279,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if updating default location with bad request returns an HttpStatus BAD_REQUEST as expected.
+	 */
 	@Test
 	public void updateTestBadRequestDefLoc() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
@@ -229,6 +290,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if creating default building works as expected and returns an HttpStatus CREATED.
+	 */
 	@Test
 	public void updateTestCreateDefBld(){
 		Settings s1 = new Settings(6, "SettingsSix", 3, 3, 50, 25, 8, 20, 10, 5, 2,  "Database");
@@ -239,6 +303,9 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
+	/**
+	 * Tests if updating default building with bad request returns an HttpStatus BAD_REQUEST as expected.
+	 */
 	@Test
 	public void updateTestBadRequestDefBld() {
 		Settings s1 = new Settings(5, "SettingsThree", 2, 2, 48, 34, 12, 12, 5, 6, 2,  "Database");
