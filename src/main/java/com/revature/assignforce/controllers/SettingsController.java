@@ -15,6 +15,10 @@ import com.revature.assignforce.beans.Settings;
 import com.revature.assignforce.service.SettingsService;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /*
@@ -24,35 +28,46 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @RestController
 @EnableSwagger2
-@Api(value="Settings-data", description="Operation define some settings during of using revature.assignforce")
+@Api(value="SettingsController")
 public class SettingsController {
 
 	@Autowired  
 	SettingsService settingService;
 	
-	/* 
+	/** 
+	 * Get Settings Information by Id
+	 * Implements the URL handler to findOne by "id" in our bean settingService
 	 * @param   id setting
 	 * @return	ResponseEntity with Status OK/ NOT FOUND
-	 * @see		Setting
+	 * @see		Settings
 	 */
-
-	// implement the URL handler to findOne by "id" in our bean settingService
-	@GetMapping(value = "{id}")	// implement the URL handler 
-	public ResponseEntity<Settings> getById(@PathVariable int id) {
+	@GetMapping(value = "{id}")
+	@ApiOperation(value = "Get Settings Information by Id", 
+	response = ResponseEntity.class, 
+	tags = "SettingsController", nickname= "getSettingsById")
+	@ApiResponses(value = {
+			@ApiResponse(code = 404, message = "Not Found"), 
+            @ApiResponse(code = 200, message = "OK", response = Settings.class)}) 
+	public ResponseEntity<Settings> getById(@ApiParam(name = "id") @PathVariable int id) {
 		Optional<Settings> s = settingService.findById(id);
 		if (!s.isPresent())
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(s.get(), HttpStatus.OK);
 	}
 	
-	/* 
-	 * @return	ResponseEntity Status CREATED / BAD REQUEST 
-	 * @see		setting
-	 * @see		ResponseEntity
+	/** 
+	 * Create New Settings Information
+	 * @param 	s	Settings
+	 * @return		ResponseEntity Status CREATED / BAD REQUEST 
+	 * @see			Settings
 	 */
-
-	// update
-	@PutMapping	// that annotation acts as a shortcut
+	@PutMapping
+	@ApiOperation(value = "Create New Settings Information", 
+	response = ResponseEntity.class, 
+	tags = "SettingsController", nickname= "updateSettings")
+	@ApiResponses(value = {
+			@ApiResponse(code = 400, message = "Bad Request"), 
+            @ApiResponse(code = 201, message = "Created", response = Settings.class)})
 	public ResponseEntity<Settings> update(@RequestBody Settings s) {
 		s = settingService.update(s);
 		if (s == null)
