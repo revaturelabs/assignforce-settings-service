@@ -28,15 +28,15 @@ public class SettingsControllerTest {
 
 	@Configuration
 	static class SettingsServiceTestContextConfiguration {
-	@Bean
+	@Bean // bean (SettingsService) will be tested 
 	public SettingsService SettingsService() {
 		return new SettingsServiceImpl();
 		}
-	@Bean
+	@Bean // bean (SettingsRepository) will be tested
 	public SettingsRepository SettingsRepository() {
 		return Mockito.mock(SettingsRepository.class);
 		}
-	@Bean
+	@Bean // bean (SettingsController) will be tested
 	public SettingsController SettingsController() {
 		return new SettingsController();
 		}
@@ -48,6 +48,7 @@ public class SettingsControllerTest {
 	@Autowired
 	private SettingsController settingsController;
 	
+
 	/**
 	 * Tests if getting settings by Id returns value as expected and returns an HttpStatus OK.
 	 */
@@ -62,6 +63,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.OK, reTest.getStatusCode());
 	}
 	
+
 	/**
 	 * Tests if getting settings by a non-existent Id returns an HttpStatus NOT_FOUND as expected.
 	 */
@@ -72,6 +74,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.NOT_FOUND, reTest.getStatusCode());
 	}
 	
+
 	/**
 	 * Tests if creating alias within settings works properly and returns an HttpStatus CREATED as expected.
 	 */
@@ -86,6 +89,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
+
 	/**
 	 * Tests if updating alias with bad request returns an HttpStatus BAD_REQUEST as expected.
 	 */
@@ -97,6 +101,7 @@ public class SettingsControllerTest {
 //		assertTrue(reTest.getStatusCode() == HttpStatus.BAD_REQUEST);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
+
 
 	/**
 	 * Tests if updating trainers per page works as expected and returns an HttpStatus CREATED.
@@ -111,6 +116,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
+
 	/**
 	 * Tests if updating trainers per page with bad request returns and HttpStatus BAD_REQUEST as expected.
 	 */
@@ -121,6 +127,7 @@ public class SettingsControllerTest {
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
+
 
 	/**
 	 * Tests if creating report on outgoing graduates works as expected and returns an HttpStatus CREATED.
@@ -135,6 +142,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
+
 	/**
 	 * Tests if updating report on outgoing graduates with bad request returns an HttpStatus BAD_REQUEST as expected.
 	 */
@@ -145,6 +153,7 @@ public class SettingsControllerTest {
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
+
 
 	/**
 	 * Tests if creating batch length works as expected and returns an HttpStatus CREATED.
@@ -159,6 +168,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
+
 	/**
 	 * Tests if updating batch length with bad request returns an HttpStatus BAD_REQUEST as expected.
 	 */
@@ -169,6 +179,7 @@ public class SettingsControllerTest {
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
+
 
 	/**
 	 * Tests if creating report on incoming candidates works as expected and returns an HttpStatus CREATED.
@@ -183,6 +194,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
+
 	/**
 	 * Tests if updating report on incoming candidates with a bad request returns an HttpStatus BAD_REQUEST as expected.
 	 */
@@ -193,6 +205,7 @@ public class SettingsControllerTest {
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
+
 
 	/**
 	 * Tests if creating a minimum batch size works as expected and returns an HttpStatus CREATED.
@@ -206,6 +219,7 @@ public class SettingsControllerTest {
 		assertEquals(s1.getMinBatchSize().intValue(), reTest.getBody().getMinBatchSize().intValue());
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
+
 
 	/**
 	 * Tests if updating minimum batch size with bad request returns an HttpStatus BAD_REQUEST as expected.
@@ -230,6 +244,7 @@ public class SettingsControllerTest {
 		assertEquals(s1.getMaxBatchSize().intValue(), reTest.getBody().getMaxBatchSize().intValue());
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
+
 	
 	/**
 	 * Tests if updating maximum batch size with bad request returns an HttpStatus BAD_REQUEST as expected.
@@ -241,6 +256,7 @@ public class SettingsControllerTest {
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
+
 
 	/**
 	 * Tests if creating trainer break days works as expected and returns an HttpStatus CREATED.
@@ -255,6 +271,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
+
 	/**
 	 * Tests if updating trainer break days with bad request returns an HttpStatus BAD_REQUEST as expected.
 	 */
@@ -265,6 +282,7 @@ public class SettingsControllerTest {
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
+
 
 	/**
 	 * Tests if creating default location works as expected and returns an HttpStatus CREATED.
@@ -279,6 +297,7 @@ public class SettingsControllerTest {
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
 
+
 	/**
 	 * Tests if updating default location with bad request returns an HttpStatus BAD_REQUEST as expected.
 	 */
@@ -289,6 +308,7 @@ public class SettingsControllerTest {
 		ResponseEntity<Settings> reTest = settingsController.update(s1);
 		assertEquals(HttpStatus.BAD_REQUEST, reTest.getStatusCode());
 	}
+
 
 	/**
 	 * Tests if creating default building works as expected and returns an HttpStatus CREATED.
@@ -302,6 +322,7 @@ public class SettingsControllerTest {
 		assertEquals(s1.getDefaultBuilding().intValue(), reTest.getBody().getDefaultBuilding().intValue());
 		assertEquals(HttpStatus.CREATED, reTest.getStatusCode());
 	}
+
 
 	/**
 	 * Tests if updating default building with bad request returns an HttpStatus BAD_REQUEST as expected.

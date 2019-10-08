@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,23 +14,45 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.assignforce.beans.Settings;
 import com.revature.assignforce.service.SettingsService;
 
+import io.swagger.annotations.Api;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+/*
+ * 
+ * A controller for retrieving, creating, updating and deleting settings information
+ *
+ */
 @RestController
+@EnableSwagger2
+@Api(value="Settings-data", description="Operation define some settings during of using revature.assignforce")
 public class SettingsController {
 
-	@Autowired
+	@Autowired  
 	SettingsService settingService;
+	
+	/* 
+	 * @param   id setting
+	 * @return	ResponseEntity with Status OK/ NOT FOUND
+	 * @see		Setting
+	 */
 
-	// findOne
-	@GetMapping(value = "{id}")
+	// implement the URL handler to findOne by "id" in our bean settingService
+	@GetMapping(value = "{id}")	// implement the URL handler 
 	public ResponseEntity<Settings> getById(@PathVariable int id) {
 		Optional<Settings> s = settingService.findById(id);
 		if (!s.isPresent())
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(s.get(), HttpStatus.OK);
 	}
+	
+	/* 
+	 * @return	ResponseEntity Status CREATED / BAD REQUEST 
+	 * @see		setting
+	 * @see		ResponseEntity
+	 */
 
 	// update
-	@PutMapping
+	@PutMapping	// that annotation acts as a shortcut
 	public ResponseEntity<Settings> update(@RequestBody Settings s) {
 		s = settingService.update(s);
 		if (s == null)
