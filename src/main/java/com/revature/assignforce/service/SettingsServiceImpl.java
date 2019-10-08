@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.revature.assignforce.beans.Settings;
@@ -25,6 +26,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Transactional
 @Service
+/*
+ * Only a user with an SVP role can access these methods.
+ */
+//@PreAuthorize("hasRole('SVP')")
 @EnableSwagger2
 public class SettingsServiceImpl implements SettingsService {
 
